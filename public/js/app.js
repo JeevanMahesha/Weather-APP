@@ -1,10 +1,17 @@
 const weatherform = document.querySelector('form')
 const searchvalue = document.querySelector('input')
+
+
 const locationNameMessage = document.querySelector('#location-name-message')
-const weatherdescription = document.querySelector('#weather_descriptions')
-const temperature = document.getElementById('temperature')
-const country = document.querySelector('#country')
-const degree = document.getElementById('f')
+const weatherdescription = document.querySelector('#weatherdescription')
+const temperature = document.querySelector('#temperature')
+const locationName = document.querySelector('#locationName')
+const feelslike = document.querySelector('#feelslike')
+const windspeed = document.querySelector('#windspeed')
+const humidity = document.querySelector('#humidity')
+const timezone = document.querySelector('#timezone')
+const locationtime = document.querySelector('#locationtime')
+
 
 weatherform.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -17,9 +24,18 @@ weatherform.addEventListener('submit', (e) => {
                     locationNameMessage.innerHTML = ""
                 }, 3000)
             } else {
+                locationNameMessage.textContent = data.location
                 weatherdescription.textContent = data.description[0]
-                country.textContent = data.location
-                temperature.innerHTML = `<p class="display-1 degree" > ${data.temperatur}&#8451;</p>`
+                temperature.innerHTML = `<h1 class="large-font mr-3" > ${data.temperatur}&#176;F</h1>`
+                locationName.textContent = data.locationName
+                feelslike.textContent = data.feelslike
+                windspeed.textContent = data.windspeed
+                humidity.textContent = data.humidity
+                timezone.textContent = data.timezone
+                var temp = data.locationtime.split(' ')
+                temp_time = temp[1]
+                temp_date = temp[0].split('-').reverse().join('/')
+                locationtime.textContent = temp_time + ' ' + temp_date
             }
         })
     setTimeout(() => {
@@ -35,7 +51,6 @@ var year = today.getFullYear();
 var todaydate = date + "/" + month + "/" + year;
 var day = today.getDay();
 var daylist = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday"];
-console.log(daylist[day]);
 var hour = today.getHours();
 var minute = today.getMinutes();
 var second = today.getSeconds();

@@ -8,7 +8,7 @@ const app = express()
 
 // Define paths for express config
 const pathForHTMLPage = path.join(__dirname, '../public')
-const pathForview = path.join(__dirname, '../templets/views')
+const pathForview = path.join(__dirname, '../views')
 
 
 // setup static directory to server 
@@ -36,13 +36,13 @@ app.get('/weather', (req, res) => {
             Error: 'You must provide address to know the weather!'
         })
     }
-    geocoding(req.query.address, (error, { latitude, longtitude, location } = {}) => {
+    geocoding(req.query.address, (error, { latitude, longtitude, location, locationName } = {}) => {
         if (error) {
             return res.send({
                 Error: error
             })
         }
-        forecast(latitude, longtitude, (error, { description, temperatur, feelslike }) => {
+        forecast(latitude, longtitude, (error, { description, temperatur, feelslike, windspeed, humidity, timezone, locationtime }) => {
             if (error) {
                 return res.send({
                     Error: error
@@ -52,7 +52,12 @@ app.get('/weather', (req, res) => {
                 'location': location,
                 'description': description,
                 'temperatur': temperatur,
-                'feelslike': feelslike
+                'feelslike': feelslike,
+                'windspeed': windspeed,
+                'humidity': humidity,
+                'locationName': locationName,
+                'timezone': timezone,
+                'locationtime': locationtime
             })
         })
     })
