@@ -12,6 +12,43 @@ const timezone = document.querySelector('#timezone')
 const locationtime = document.querySelector('#locationtime')
 
 
+const locationAddress = document.getElementById('location');
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        return false;
+    }
+}
+
+function showPosition(position) {
+    fetch('http://api.weatherstack.com/current?access_key=99efb4d483556a155762ae11abd97747&query=' + position.coords.latitude + ',' + position.coords.longitude)
+        .then((res) => res.json())
+        .then((data) => locationAddress.value = data.location.name)
+    setTimeout(() => {
+        if (document.getElementById('location').value) {
+            fetch('/weather?address=' + document.getElementById('location').value)
+                .then((res) => res.json())
+                .then((data) => {
+                    locationNameMessage.textContent = data.location
+                    weatherdescription.textContent = data.description[0]
+                    temperature.innerHTML = `<h1 class="large-font mr-3" > ${data.temperatur}&#176;F</h1>`
+                    locationName.textContent = data.locationName
+                    feelslike.textContent = data.feelslike
+                    windspeed.textContent = data.windspeed
+                    humidity.textContent = data.humidity
+                    timezone.textContent = data.timezone
+                    var temp = data.locationtime.split(' ')
+                    temp_time = temp[1]
+                    temp_date = temp[0].split('-').reverse().join('/')
+                    locationtime.innerHTML = `<h5> <img src="img/icon/time.png" alt="time"> ${temp_time} &nbsp&nbsp&nbsp  <img src="img/icon/date.png" alt=""> ${temp_date} </h5>`
+                })
+        }
+    }, 1000)
+}
+getLocation()
+
 weatherform.addEventListener('submit', (e) => {
     e.preventDefault()
     fetch('/weather?address=' + searchvalue.value)
@@ -40,7 +77,6 @@ weatherform.addEventListener('submit', (e) => {
     setTimeout(() => {
         document.querySelector('form').reset();
     }, 1)
-
 })
 
 var today = new Date();

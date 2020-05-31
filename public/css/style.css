@@ -5,6 +5,7 @@ body {
     background-image: url('../img/image.png');
     background-size: cover;
     background-repeat: no-repeat;
+    height: auto;
 }
 
 .card0 {
