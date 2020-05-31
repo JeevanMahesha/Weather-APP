@@ -23,9 +23,9 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    fetch('http://api.weatherstack.com/current?access_key=99efb4d483556a155762ae11abd97747&query=' + position.coords.latitude + ',' + position.coords.longitude)
+    fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude + '&localityLanguage=en')
         .then((res) => res.json())
-        .then((data) => locationAddress.value = data.location.name)
+        .then((data) => locationAddress.value = data.locality)
     setTimeout(() => {
         if (document.getElementById('location').value) {
             fetch('/weather?address=' + document.getElementById('location').value)
