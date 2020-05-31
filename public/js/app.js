@@ -35,7 +35,7 @@ weatherform.addEventListener('submit', (e) => {
                 var temp = data.locationtime.split(' ')
                 temp_time = temp[1]
                 temp_date = temp[0].split('-').reverse().join('/')
-                locationtime.textContent = temp_time + ' ' + temp_date
+                locationtime.innerHTML = `<h5> <img src="img/icon/time.png" alt="time"> ${temp_time} &nbsp&nbsp&nbsp  <img src="img/icon/date.png" alt=""> ${temp_date} </h5>`
             }
         })
     setTimeout(() => {
