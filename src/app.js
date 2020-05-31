@@ -26,10 +26,6 @@ app.get('', (req, res) => {
     })
 })
 
-app.get('/test', (req, res) => {
-    res.render('test')
-})
-
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
