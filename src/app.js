@@ -60,11 +60,11 @@ app.get('/weather', (req, res) => {
     })
 })
 
-app.get('*', (req, res) => {
-    res.render('error', {
-        errorText: '404 Error'
-    })
-})
+// app.get('*', (req, res) => {
+//     res.render('error', {
+//         errorText: '404 Error'
+//     })
+// })
 
 
 app.listen(port, () => {
