@@ -1,7 +1,6 @@
 const weatherform = document.querySelector('form')
 const searchvalue = document.querySelector('input')
 
-
 const locationNameMessage = document.querySelector('#location-name-message')
 const weatherdescription = document.querySelector('#weatherdescription')
 const temperature = document.querySelector('#temperature')
@@ -46,7 +45,7 @@ weatherform.addEventListener('submit', (e) => {
 
 var today = new Date();
 var date = today.getDate();
-var month = today.getMonth();
+var month = 1 + today.getMonth();
 var year = today.getFullYear();
 var todaydate = date + "/" + month + "/" + year;
 var day = today.getDay();
