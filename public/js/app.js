@@ -109,5 +109,11 @@ if (hour === 0 && prepand === ' AM ') {
         prepand = ' AM';
     }
 }
+if (hour >= 0 && hour < 10) {
+    hour = '0' + hour
+}
+if (minute >= 0 && minute < 10) {
+    minute = '0' + minute
+}
 document.getElementById('time').innerHTML = hour + " : " + minute + prepand + daylist[day];
 document.getElementById('date').innerHTML = todaydate;
